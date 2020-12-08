@@ -1,6 +1,7 @@
 import React from 'react'
 import ApiContext from './ApiContext'
 import config from './config'
+import './Add.css'
 
 
 class AddNote extends React.Component {
@@ -86,19 +87,18 @@ class AddNote extends React.Component {
     
 
     return (
-
-      <form>
-        <label htmlFor="add-folder">Add Folder</label>
+      <form className='note-create'>
+        <label htmlFor="add-folder">Add to Folder:</label>
         <select id="add-folder"
         onChange={(e) => this.getFolder(e.target.value)}
         >{this.generateFolderList()}</select>
-        <label htmlFor="note-name">Note Name</label>
+        <label htmlFor="note-name">Name:</label>
         <input 
           id="note-name"
           onChange={(e) => this.getName(e.target.value)}
         >
         </input>
-        <label htmlFor="add-description">Add Description</label>
+        <label htmlFor="add-description">Note Description:</label>
         <textarea name="add-description" id="add-description" cols="30" rows="10"
         onChange={(e) => this.getContent(e.target.value)}
         ></textarea>

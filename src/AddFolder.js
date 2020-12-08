@@ -1,7 +1,7 @@
 import React from 'react'
 import config from './config'
 import ApiContext from './ApiContext'
-import './add.css'
+import './Add.css'
 
 class AddFolder extends React.Component {
   
@@ -12,13 +12,8 @@ class AddFolder extends React.Component {
     }
   }
 
-
-
-
-
   static contextType = ApiContext
   
-
   handleClickAddFolder = (name) => {
     let newItem = JSON.stringify({
       name: name,
@@ -48,7 +43,7 @@ class AddFolder extends React.Component {
       console.error({error});
     });
   } else {
-    alert('please use more than 3 characters for name')
+    alert('Data Error: \n Please use more than 3 characters for the folder name')
   }
     
   }

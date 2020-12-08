@@ -2,10 +2,18 @@ label {
   color: white;
 }
 
-
 form {
-  display:flex;
+  display: flex;
+  padding: 30px;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+}
 
+form > * {
+  padding: 10px;
+}
+
+button {
+  max-width: 300px;
+  font-size: large;
 }
