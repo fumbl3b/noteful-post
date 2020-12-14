@@ -1,7 +1,7 @@
 import React from 'react'
 import config from './config'
 import ApiContext from './ApiContext'
-import './Add.css'
+import './add.css'
 
 class AddFolder extends React.Component {
   

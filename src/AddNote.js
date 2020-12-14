@@ -1,7 +1,7 @@
 import React from 'react'
 import ApiContext from './ApiContext'
 import config from './config'
-import './Add.css'
+import './add.css'
 
 
 class AddNote extends React.Component {
