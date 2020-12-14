@@ -1,6 +1,7 @@
 import React from 'react'
 import config from './config'
 import ApiContext from './ApiContext'
+import PropTypes from 'prop-types'
 import './add.css'
 
 class AddFolder extends React.Component {
@@ -56,7 +57,6 @@ class AddFolder extends React.Component {
 
 
   render() {
-    //console.log(this.handleClickAddFolder('hi'))
     console.log(this.state.name)
     return (
       <div>
@@ -88,7 +88,10 @@ class AddFolder extends React.Component {
 
 }
 
-
-
+AddFolder.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+}
 
 export default AddFolder

@@ -1,16 +1,17 @@
 import React from 'react'
 import ApiContext from './ApiContext'
 import config from './config'
+import PropTypes from 'prop-types'
 import './add.css'
 
 
 class AddNote extends React.Component {
-  state = { 
-    name:'',
-    folderId:'',
-    content:'',
-    modified:''
-   }
+  state = {
+    name: '',
+    folderId: '',
+    content: '',
+    modified: ''
+  }
 
   static contextType = ApiContext;
 
@@ -22,7 +23,7 @@ class AddNote extends React.Component {
   }
 
   handleClickAddNote = (name, description, folder) => {
-   let newDate = new Date().toISOString()
+    let newDate = new Date().toISOString()
     let newItem = JSON.stringify({
       name: name,
       folderId: folder || document.getElementById('add-folder').value,
@@ -31,82 +32,87 @@ class AddNote extends React.Component {
     })
     let error;
 
-    if(name.length >= 3 && description.length >= 3){
-    fetch(`${config.API_ENDPOINT}/notes`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: newItem
-    })
-    .then(res => {
-      if (!res.ok){
-        error = { code: res.status };
-      }
-      return res.json();
-    })
-    .then(note => {
-      if (error) {
-        error.message = note.message;
-        return Promise.reject(error);
-      }
-      this.context.addNoteToState(note)
-      this.props.history.push(`/`)
-    })
-    .catch(error => {
-      console.error({error});
-    });
-  } else {
-    alert('Please use at least 3 characters for name and description')
-  }
-    
+    if (name.length >= 3 && description.length >= 3) {
+      fetch(`${config.API_ENDPOINT}/notes`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: newItem
+      })
+        .then(res => {
+          if (!res.ok) {
+            error = { code: res.status };
+          }
+          return res.json();
+        })
+        .then(note => {
+          if (error) {
+            error.message = note.message;
+            return Promise.reject(error);
+          }
+          this.context.addNoteToState(note)
+          this.props.history.push(`/`)
+        })
+        .catch(error => {
+          console.error({ error });
+        });
+    } else {
+      alert('Please use at least 3 characters for name and description')
+    }
   }
 
   getName = (name) => {
     this.setState({
-      name:name
+      name: name
     })
-
   }
 
   getFolder = (folder) => {
     this.setState({
       folderId: folder
     })
-
   }
+
   getContent = (content) => {
     this.setState({
       content: content
     })
-
   }
 
-
-
-
-  render() { 
-    
+  render() {
 
     return (
       <form className='note-create'>
         <label htmlFor="add-folder">Add to Folder:</label>
-        <select id="add-folder"
-        onChange={(e) => this.getFolder(e.target.value)}
-        >{this.generateFolderList()}</select>
+        <select
+          id="add-folder"
+          onChange={(e) => this.getFolder(e.target.value)}
+        >
+          {this.generateFolderList()}
+        </select>
         <label htmlFor="note-name">Name:</label>
-        <input 
+        <input
           id="note-name"
           onChange={(e) => this.getName(e.target.value)}
         >
         </input>
         <label htmlFor="add-description">Note Description:</label>
-        <textarea name="add-description" id="add-description" cols="30" rows="10"
-        onChange={(e) => this.getContent(e.target.value)}
-        ></textarea>
-        <button type="button" onClick={()=> this.handleClickAddNote(this.state.name, this.state.content, this.state.folderId)}>Add Note</button>
+        <textarea
+          name="add-description"
+          id="add-description"
+          cols="30"
+          rows="10"
+          onChange={(e) => this.getContent(e.target.value)}
+        />
+        <button type="button" onClick={() => this.handleClickAddNote(this.state.name, this.state.content, this.state.folderId)}>Add Note</button>
       </form>
-
-      );
+    );
   }
 }
- 
+
+AddNote.PropTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+}
+
 export default AddNote;
