@@ -57,30 +57,23 @@ class AddFolder extends React.Component {
 
 
   render() {
-    console.log(this.state.name)
     return (
       <div>
-
         <form>
-          <label
-            htmlFor='new-folder'
-          >New Folder Name:</label>
+          <label htmlFor='new-folder'>New Folder Name:</label>
           <input
             id='new-Folder'
             defaultValue='Hello'
             onChange={(e) => this.getValue(e.target.value)}
-          >
-
-          </input>
+          />
           <button
             className='Add Folder'
             type='button'
             onClick={(e) => this.handleClickAddFolder(`${this.state.name}`)}
           >
             Add New Folder!
-      </button>
+          </button>
         </form>
-
       </div>
     )
   }

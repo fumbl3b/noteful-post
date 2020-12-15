@@ -10,6 +10,9 @@ import './Note.css'
 export default class Note extends React.Component {
   static defaultProps ={
     onDeleteNote: () => {},
+    name: 'missing',
+    id: 'missing',
+    modified: 'missing',
   }
   static contextType = ApiContext;
 
@@ -71,7 +74,11 @@ export default class Note extends React.Component {
 }
 
 Note.propTypes = {
-  name: PropTypes.string,
-  id: PropTypes.string,
-  modified: PropTypes.string
+  name: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+      ]).isRequired,
+  modified: PropTypes.string.isRequired,
+  onDeleteNote: PropTypes.func.isRequired,
 }

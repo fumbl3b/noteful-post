@@ -109,7 +109,7 @@ class AddNote extends React.Component {
   }
 }
 
-AddNote.PropTypes = {
+AddNote.propTypes = {
   history: PropTypes.object,
   location: PropTypes.object,
   match: PropTypes.object,

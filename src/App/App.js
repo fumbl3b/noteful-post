@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Route, Link} from 'react-router-dom';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
@@ -33,10 +33,10 @@ class App extends Component {
                 return Promise.all([notesRes.json(), foldersRes.json()]);
             })
             .then(([notes, folders]) => {
-                this.setState({notes, folders});
+                this.setState({ notes, folders });
             })
             .catch(error => {
-                console.error({error});
+                console.error({ error });
             });
     }
 
@@ -58,7 +58,7 @@ class App extends Component {
         })
     }
 
-   
+
 
     renderNavRoutes() {
         return (
@@ -102,26 +102,25 @@ class App extends Component {
             deleteNote: this.handleDeleteNote,
             addFolder: this.handleAddFolder,
             addNoteToState: this.handleAddNote
-            
-
         };
         return (
-           <NotefulError>
-           <ApiContext.Provider value={value}>
-                <div className="App">
-                    <nav className="App__nav">{this.renderNavRoutes()}</nav>
-                    <header className="App__header">
-                        <h1>
-                            <Link to="/">Noteful</Link>{' '}
-                            <FontAwesomeIcon icon="check-double" />
-                        </h1>
-                    </header>
-                    <main className="App__main">
-                    <Route path='/add-folder' component={AddFolder}/>
-                    <Route path='/add-note' component={AddNote}/>
-                        {this.renderMainRoutes()}</main>
-                </div>
-            </ApiContext.Provider>
+            <NotefulError>
+                <ApiContext.Provider value={value}>
+                    <div className="App">
+                        <nav className="App__nav">{this.renderNavRoutes()}</nav>
+                        <header className="App__header">
+                            <h1>
+                                <Link to="/">Noteful</Link>{' '}
+                                <FontAwesomeIcon icon="check-double" />
+                            </h1>
+                        </header>
+                        <main className="App__main">
+                            <Route path='/add-folder' component={AddFolder} />
+                            <Route path='/add-note' component={AddNote} />
+                            {this.renderMainRoutes()}
+                        </main>
+                    </div>
+                </ApiContext.Provider>
             </NotefulError>
         );
     }
