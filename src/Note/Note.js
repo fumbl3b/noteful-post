@@ -27,14 +27,21 @@ export default class Note extends React.Component {
       },
     })
       .then(res => {
-        if (!res.ok)
+        console.log(res);
+        if (!res.ok) {
+          console.log('res was not ok')
           return res.json().then(e => Promise.reject(e))
-        return res.json()
+        }
+        console.log('res was ok')
+        return res.json(noteId)
       })
-      .then(() => {
+      .then(resJson => {
+        console.log('you got to the next part')
         this.context.deleteNote(noteId)
         // allow parent to perform extra behaviour
         this.props.onDeleteNote(noteId)
+        this.props.history.push(`/`)
+        return resJson;
       })
       .catch(error => {
         console.error({ error })
@@ -75,6 +82,7 @@ export default class Note extends React.Component {
 
 Note.propTypes = {
   name: PropTypes.string.isRequired,
+  history: PropTypes.object,
   id: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
